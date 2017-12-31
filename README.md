@@ -1,175 +1,118 @@
-slim-pickins-jekyll-theme
-=============
+# Hyde
 
-Live Demo [HERE](http://chrisanthropic.github.io/slim-pickins-jekyll-theme/)
+Hyde is a brazen two-column [Jekyll](http://jekyllrb.com) theme that pairs a prominent sidebar with uncomplicated content. It's based on [Poole](http://getpoole.com), the Jekyll butler.
 
-Slim Pickins is what I consider to be a minimal 'core' theme with everything I need to quickly develop new themes for Jekyll.
+![Hyde screenshot](https://f.cloud.github.com/assets/98681/1831228/42af6c6a-7384-11e3-98fb-e0b923ee0468.png)
 
-## Basic features include:
 
-* Jekyll 3.0 compatible
-* SASS
-* Minimal Zurb Foundation 6 Integration
-    * Responsive grid
-    * Visibility classes
-* Responsive navigation
-* Optional full-width banner
-* Sticky footer
-* **Javascript free**
-* Custom Rakefile with tasks for deploying and notifying search engines about updates
-* image_optim plugin to optimize all images
-* Basic SEO
+## Contents
 
-### SASS
-Includes the following variables:
+- [Usage](#usage)
+- [Options](#options)
+  - [Sidebar menu](#sidebar-menu)
+  - [Sticky sidebar content](#sticky-sidebar-content)
+  - [Themes](#themes)
+  - [Reverse layout](#reverse-layout)
+- [Development](#development)
+- [Author](#author)
+- [License](#license)
 
-**Base Colors**
-* $primary-color
-* $secondary-color
-* $complimentary-color
-* $body-bg
-* $body-font-color
 
-**Links**
-* link-color
-* link-hover-color
-* link-visited-color
+## Usage
 
-**Text**
-* $base-font-family
-* $base-font-size
-* $small-font-size
-* $base-line-height
+Hyde is a theme built on top of [Poole](https://github.com/poole/poole), which provides a fully furnished Jekyll setup—just download and start the Jekyll server. See [the Poole usage guidelines](https://github.com/poole/poole#usage) for how to install and use Jekyll.
 
-**Navbar Settings**
-* $navbar-height
-* $navbar-color
-* $navbar-text-color
-* $navbar-hover-color
-* $navbar-active-color
-* $navbar-font-size
-* $navbar-font-family
 
-**Socials Navbar Settings**
-* $socials-font-color
-* $socials-font-size
+## Options
 
-**Utility**
-* $spacing-unit
+Hyde includes some customizable options, typically applied via classes on the `<body>` element.
 
-**Footer**
-* $footer-height
-* $footer-color
 
-### GRID
-Uses minimal sass from Zurb Foundation:
+### Sidebar menu
 
-* [grid](http://foundation.zurb.com/sites/docs/grid.html)
-
-### NAVIGATION
-A fully responsive navigation bar with the following features:
-
-* 2 navigation areas
-  * Left - Primary navigation 
-  * Right - Social media links
-* Both navigation areas are populated using Jekyll 'data' files, nav.yml and socials.yml respectively
-* Ability to create 'external' links that link offsite while still using socials.yml to do so
-* Easily customizable text, link, and background colors using the supplied sass variables
-
-### BANNER
-This theme is configured with a 'wrap' of 1920px so banner images look best at that width.
-
-First it checks a pages yaml frontmatter for the header image, if none is found then it checks for a site-wide default in your config.yml, if none is found then no banner image is displayed.
-
-**Site-Wide**
-You can set a site-wide default banner image by adding the following to your _config.yml:
-  `header_image: "path/to/image.jpg"`
-
-**Per Page**
-You can also override it per page by adding the following code to a pages yaml front matter:
-  `header_image: path/to/image.jpg`
-
-### STICKY FOOTER
-I like my footers to stay on the bottom of the page no matter what. You can easily edit the size and color using the supplied sass variables.
-
-### JAVASCRIPT FREE
-The only thing in the theme that uses Javascript is the optional use of google analytics.
-
-### RAKEFILE
-Includes the following custom tasks:
-
-* *notify* - pings google and bing to notify them about changes to the site/sitemap
-
-These tasks have been bundled into custom build and deploy tasks
-
-* *build* - runs `jekyll build` followed by `minify_html`
-* *deploy* - runs `s3_website push` and then `notify`
-
-### IMAGE_OPTIM PLUGIN
-
-* Custom [image_optim](https://github.com/chrisanthropic/image_optim-jekyll-plugin) plugin will optimize all images in the /images folder and any subdirectories
-  * Uses the original [image_optim](https://github.com/toy/image_optim)
-* Cache file is created on the first run so that only updated/new images are optimized
-
-### BASIC SEO
-
-* Google Analytics*
-  * *Uses Javascript
-  * just add your `google_universal_analytics ID` to the _config.yml file.
-* Facebook Open Graph
-  Fill out the following in your config.yml
-
-  ```
-    facebook_app_id:                      #enter your App ID
-    facebook_locale: en_US
-    facebook_page:                        #the URL of your Facebook Page
-    facebook_image:			#enter a default image (at least 200x200px) to use here for posts/pages that don't have one.	
-  ```
-
-* Twitter Cards
-  Fill out the following in your config.yml
-
-  ```
-    twitter_user: 
-    twitter_card: true
-    twitter_image: 			 #enter a default image (at least 200x200px) to use here for posts/pages that don't have one.
-  ```
-
-* Sitewide description/keywords
-  * Edit the description in your config.yml and it will be used as the default description in the metadata for every page/post.
-  * Add `Keywords: some, bunch, of random keywords` to your config.yml and it will be used as the default keywords in the metadata for every post/page.
-  * Set specific keywords per page/post (override the sitewide defaults) by adding them to the front matter of any page/post.
-    * Example:
+Create a list of nav links in the sidebar by assigning each Jekyll page the correct layout in the page's [front-matter](http://jekyllrb.com/docs/frontmatter/).
 
 ```
 ---
-Title: Example Post
-Description: Some Yaml Frontmatter to show what's what.
-Keywords: Example, Zim, this is only a test
+layout: page
+title: About
 ---
 ```
 
-## Basic Use
-For now it's best to start fresh or install the them and then transfer over any old files (posts, images, etc) from your old site.
+**Why require a specific layout?** Jekyll will return *all* pages, including the `atom.xml`, and with an alphabetical sort order. To ensure the first link is *Home*, we exclude the `index.html` page from this list by specifying the `page` layout.
 
-* Git clone this repo, cd into the directory and run `bundle install --binstubs --path=vendor` to install the required dependencies.
-* Edit your config.yml file
-  * Change the title and description at a minimum.
-* Update your navigation 
-  * edit the `_data/nav.yml` file as needed
-* Update your social links
-  * edit the `_data/socials.yml` file as needed
 
-## Deploying
-I use S3 to host my site and the [s3_website](https://github.com/laurilehmijoki/s3_website) plugin to deploy, if you don't do both of these, delete the `s3_website.yml` file and edit the deploy raketask to fit your needs.
+### Sticky sidebar content
 
-If you plan on using S3 make sure you edit the configs:
+By default Hyde ships with a sidebar that affixes it's content to the bottom of the sidebar. You can optionally disable this by removing the `.sidebar-sticky` class from the sidebar's `.container`. Sidebar content will then normally flow from top to bottom.
 
-* FIRST - add the s3_website.yml file to your gitignore so your credentials don't end up on the web.
-* s3_website.yml
-  * add your `s3_id`. `s3_secret`, and `s3_bucket`
-* Update the Rakefile notify task to use your url
-  * replace `site = "www.YOUR-URL.com"` with your actual url.
+```html
+<!-- Default sidebar -->
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    ...
+  </div>
+</div>
 
-## MISC.
-The blog posts included are duplicated from my actual blog and are the documentation of how I created this theme. From starting with a fresh Jekyll installation to the final product.
+<!-- Modified sidebar -->
+<div class="sidebar">
+  <div class="container">
+    ...
+  </div>
+</div>
+```
+
+
+### Themes
+
+Hyde ships with eight optional themes based on the [base16 color scheme](https://github.com/chriskempson/base16). Apply a theme to change the color scheme (mostly applies to sidebar and links).
+
+![Hyde in red](https://f.cloud.github.com/assets/98681/1831229/42b0b354-7384-11e3-8462-31b8df193fe5.png)
+
+There are eight themes available at this time.
+
+![Hyde theme classes](https://f.cloud.github.com/assets/98681/1817044/e5b0ec06-6f68-11e3-83d7-acd1942797a1.png)
+
+To use a theme, add anyone of the available theme classes to the `<body>` element in the `default.html` layout, like so:
+
+```html
+<body class="theme-base-08">
+  ...
+</body>
+```
+
+To create your own theme, look to the Themes section of [included CSS file](https://github.com/poole/hyde/blob/master/public/css/hyde.css). Copy any existing theme (they're only a few lines of CSS), rename it, and change the provided colors.
+
+### Reverse layout
+
+![Hyde with reverse layout](https://f.cloud.github.com/assets/98681/1831230/42b0d3ac-7384-11e3-8d54-2065afd03f9e.png)
+
+Hyde's page orientation can be reversed with a single class.
+
+```html
+<body class="layout-reverse">
+  ...
+</body>
+```
+
+
+## Development
+
+Hyde has two branches, but only one is used for active development.
+
+- `master` for development.  **All pull requests should be submitted against `master`.**
+- `gh-pages` for our hosted site, which includes our analytics tracking code. **Please avoid using this branch.**
+
+
+## Author
+
+**Mark Otto**
+- <https://github.com/mdo>
+- <https://twitter.com/mdo>
+
+
+## License
+
+Open sourced under the [MIT license](LICENSE.md).
+
+<3
